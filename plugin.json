@@ -14,7 +14,7 @@
         "description": "Đọc truyện trên trang Net Truyện",
         "type": "comic",
         "locale": "vi_VN",
-        "tag": "nsfw"
+        "tag": ""
         }
     ]
 }
