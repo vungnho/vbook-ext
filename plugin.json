@@ -4,17 +4,29 @@
     "description": "Sống, cười và yêu thương."
   },
   "data": [
-        {
-        "name": "Net Truyện [ud]",
-        "author": "Vungnho",
-        "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyen/plugin.zip",
-        "version": 1,
-        "source": "https://www.nettruyenvio.com",
-        "icon": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyen/icon.png",
-        "description": "Đọc truyện trên trang Net Truyện",
-        "type": "comic",
-        "locale": "vi_VN",
-        "tag": ""
-        }
-    ]
+    {
+      "name": "Net Truyện [ud]",
+      "author": "Vungnho",
+      "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyen/plugin.zip",
+      "version": 1,
+      "source": "https://www.nettruyenvio.com",
+      "icon": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyen/icon.png",
+      "description": "Đọc truyện trên trang Net Truyện",
+      "type": "comic",
+      "locale": "vi_VN",
+      "tag": ""
+    },
+    {
+      "name": "Net Truyện [vn]",
+      "author": "Vungnho",
+      "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyenvn/plugin.zip",
+      "version": 1,
+      "source": "https://nettruyen.net.vn",
+      "icon": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/nettruyenvn/icon.png",
+      "description": "Đọc truyện trên trang Net Truyện",
+      "type": "comic",
+      "locale": "vi_VN",
+      "tag": ""
+    }
+  ]
 }
