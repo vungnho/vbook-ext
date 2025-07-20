@@ -1,0 +1,21 @@
+{
+  "metadata": {
+    "name": "CarLoop",
+    "author": "vungnho",
+    "version": 1,
+    "source": "https://carloop.io/",
+    "regexp": "https://carloop\\.io/.*",
+    "description": "Extension for carloop.io",
+    "locale": "vi_VN",
+    "tag": "",
+    "type": "comic"
+  },
+  "script": {
+    "home": "home.js",
+    "genre": "genre.js",
+    "detail": "detail.js",
+    "search": "search.js",
+    "toc": "toc.js",
+    "chap": "chap.js"
+  }
+}
