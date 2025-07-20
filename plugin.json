@@ -27,6 +27,18 @@
       "type": "comic",
       "locale": "vi_VN",
       "tag": ""
+    },
+    {
+      "name": "Carloop",
+      "author": "Vungnho",
+      "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/carloop/plugin.zip",
+      "version": 1,
+      "source": "https://nettruyen.net.vn",
+      "icon": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/carloop/icon.png",
+      "description": "Đọc truyện trên trang Carloop",
+      "type": "comic",
+      "locale": "vi_VN",
+      "tag": ""
     }
   ]
 }
