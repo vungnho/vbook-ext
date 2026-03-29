@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Mê Truyện Chữ",
     "author": "Vungnho",
-    "version": 1,
+    "version": 2,
     "source": "https://metruyenchu.com.vn/",
     "regexp": "(www.)?metruyenchu.com.vn/[^/]+",
     "description": "Đọc truyện trên trang MTC.",
