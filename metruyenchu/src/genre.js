@@ -10,9 +10,13 @@ function execute() {
             let link = e.attr("href");
 
             if (title && link && !link.includes("javascript")) {
+                let fullLink = link;
+                if (link.indexOf("http") !== 0) {
+                    fullLink = BASE_URL + (link.indexOf("/") === 0 ? "" : "/") + link;
+                }
                 genres.push({
                     title: title,
-                    input: link,
+                    input: fullLink,
                     script: "gen.js"
                 });
             }
