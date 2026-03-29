@@ -1,1 +1,7 @@
-h7KLax0P1XxC3UhUZxH1Ev3NEKHbQgx0P2XxwWT1lfTzPhpsyKcI6LcCx0P2Xx1foP7HVfSJ7ZFKeioG5IuupKt8dHAbFSIdUvupY1IJYJ7f4XysMsWDknb0jJYx0P2XxE0TfAPwVx0P2Xxd2MoXfh012GodK3wx0P2XxIugdhMZivmNZtDPvaPKox0P2XxQUPqgmpIMx4m44Ex0P3Xx
+load('config.js');
+function execute() {
+    return Response.success([
+        {title: "Truyện hot", input: BASE_URL + "/danh-sach/truyen-hot/", script: "gen.js"},
+        {title: "Truyện full", input: BASE_URL + "/danh-sach/truyen-full", script: "gen.js"}
+    ]);
+}

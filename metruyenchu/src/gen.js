@@ -1,1 +1,46 @@
-SyeEmaPSlTJY5C4kNbu7er8st55Txi1LfzF132w66jCp9NWSs0x0P1XxBNowmx0P1XxLL4u3Yj6gLEDgVgET7YmukMVO5oWODwzJmSbx0P1Xx8x0P2XxVSlXzQpDzp1McYLCsiiwXaBt8Z54KKlgowtktJnLKQxMRLkApfQ0x0P2Xx0GheRlJqok3eAmqZcY1baMdERsZ6bUdj6OfZ5QC3gX1EKsYzncnXmJx0P2Xxz1Jw90vF8k0TEZsHpE1jO9EYIx0P2XxEZl6px0P1XxtzKX4PFf6Bkgkg85U5kUJN3DHWARtcaIRRfn5doLYM48onSI4xdOY9MhxteSmwYNlx0P2Xx12VDhqbISzLx0P1XxbJwuDBZCwwZ14kng2wIUBx1Q63nnxdWDUEOex0P1XxmjsnRnssjjSGPl4vLecBCpNtAM6R2ndwx0P2XxSgx0P1XxwuEFzrcooyltK3NYx0P1XxUnkcvURft156pMHsJ70L9qcEclqwjMxxblx0P2XxCLz1COAmSvfTjQjCdX9NAObrDWLx0P1Xx8SloHUx0P1Xx2vasuWcfzx0P2XxljRx0P1XxpNpRnqeAbVNPCFBJtKeFfCoVTIBm0upPGoeOXYFl7T4W77dUEzUW5McLF7sz87skbcpEYYkoJowIgx0P2XxD2RCcd16PG6b0fTrZCb0YxG9QnQ4cYkx0P1XxGQzvEWiVrsNj1dc4dx0P2XxR81EKy0wLdZ2jPMRDFMWbkWsog4zNpecTnYawnJ2jsbix0P1XxRSFyzDvWKFYmdkBmQa99JBL705MAVO0kqBzl6ObO8rtKoXkHNRB15Gs9UYT8RlVw0wNdPGvb907kUXp7SEh9OQNKvIx0P1XxL2dpOGUQgoxjAx0P2XxrgcW7VPEzYfP0amRddhU3R9pOM0zSVHGiIwLgGZN673TJ38hN4x0P2XxcVNZfEWzx4ZWShOwQx0P2XxZFhGeKT9JjUdiDjAgHNqVaEeMeeck4AVOSH2Fjgj6gLZqUXDAZcuRzX8MGe1dR3Tjg66C5wCGE4lx0P1XxFGyJxQYAikGBBu9Ohb7N5I5djqtU85ZMECsBemRvBHAMFC59Lay1oOvQ1qO2x0P1XxCsSKqhnjkdwyI0GOt01MMx0P1XxdxAzoLkKOBWvIx0P1Xx5n1mmKmFuWO4nuHUNktfL22ycE2SHSi5DSHVqfxLpQCejieMCV0CvNx0P2XxqJQx0P3Xx
+load('config.js');
+function execute(url, page) {
+    if (!page) page = '1';
+    let response = fetch(url, {
+        method: "GET",
+        queries: {
+            page: page
+        }
+    });
+
+    if (response.ok) {
+        let doc = response.html();
+        let next = doc.select(".phan-trang a.active + a").text();
+
+        let data = [];
+        doc.select(".truyen-list .item").forEach(e => {
+            let imgElement = e.select(".cover img").first();
+            let coverImg = imgElement ? imgElement.attr("src") : "";
+
+            if (coverImg && coverImg.startsWith("//")) {
+                coverImg = "https:" + coverImg;
+            }
+
+            let titleAnchor = e.select("h3 a").first();
+
+            let chapterInfo = "";
+            e.select(".line").forEach(line => {
+                if (line.text().contains("Số chương")) {
+                    chapterInfo = line.text().trim();
+                }
+            });
+
+            data.push({
+                name: titleAnchor ? titleAnchor.text() : "",
+                link: titleAnchor ? titleAnchor.attr("href") : "",
+                cover: coverImg,
+                description: chapterInfo,
+                host: BASE_URL
+            });
+        });
+
+        return Response.success(data, next);
+    }
+
+    return null;
+}
