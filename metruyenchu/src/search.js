@@ -9,7 +9,6 @@ function execute(key, page) {
 
     if (response.ok) {
         let doc = response.html();
-        let next = doc.select(".pagination").select("li.active + li").text();
         let next = doc.select(".phan-trang").select("li.active + li").text();
 
         let data = [];

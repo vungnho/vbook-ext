@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Mê Truyện Chữ",
     "author": "Nahona",
-    "version": 6,
+    "version": 6.1,
     "source": "https://metruyenchu.com.vn/",
     "regexp": "(www.)?metruyenchu.com.vn/[^/]+",
     "description": "Đọc truyện trên trang MTC. (search fixed)",
