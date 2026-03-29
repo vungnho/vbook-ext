@@ -42,9 +42,9 @@
     },
     {
       "name": "Mê Truyện Chữ",
-      "author": "Vungnho",
+      "author": "Nahona",
       "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/metruyenchu/plugin.zip",
-      "version": 7,
+      "version": 5,
       "source": "https://metruyenchu.com.vn/",
       "icon": "https://metruyenchu.com.vn/favicon.ico?v=2",
       "description": "Đọc truyện trên trang MTC. (search fixed)",
