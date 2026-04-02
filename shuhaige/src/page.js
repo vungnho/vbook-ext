@@ -1,5 +1,4 @@
 load('config.js');
-load('config.js');
 function execute(url) {
     url = url.replace(/\/$/, "");
     let response = fetch(url);
