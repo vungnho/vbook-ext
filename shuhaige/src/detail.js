@@ -1,59 +1,41 @@
 load('config.js');
 function execute(url) {
-    url = url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
+    var match = url.match(/(?:shu_)?(\d+)/);
+    var bookId = match ? match[1] : null;
 
-    let response = fetch(url);
-    if (response.ok) {
-        let doc = response.html();
 
-        let coverImg = doc.select(".book-info-pic img").first().attr("src");
-        if (coverImg && coverImg.startsWith("//")) {
-            coverImg = "https:" + coverImg;
-        }
+    let response = fetch(BASE_URL + "/" bookId + "/");
+    if (!response.ok) return null;
+    let doc = response.html();
+    let title = doc.select('meta[property="og:novel:book_name"]').attr('content') || '';
+    let author = doc.select('meta[property="og:novel:author"]').attr('content') || '';
+    let cover = doc.select('meta[property="og:image"]').attr('content') || '';
+    let description = doc.select('meta[name="description"]').attr('content') || '';
+    let categories = [];
 
-        let genres = [];
-        doc.select(".li--genres a").forEach(e => {
-            genres.push({
-                title: e.text(),
-                input: e.attr("href"),
-                script: "gen.js"
-            });
-        });
+    doc.select('meta[property="og:novel:category"]').forEach(meta => {
+        categories.push(meta.attr('content'));
+    });
 
-        let detail = "";
-        let introPart = doc.select("p.intro").first();
-        if (introPart) {
-            detail += "🔔 " + introPart.text().trim() + "<br>---<br>";
-        }
+    doc.select('meta[property="og:novel:status"]').forEach(meta => {
+        categories.push(meta.attr('content'));
+    });
+    doc.select("h1").remove()
 
-        doc.select(".book-info-text ul li").forEach(li => {
-            detail += li.text().trim() + "<br>";
-        });
 
-        let descEl = doc.select(".scrolltext").first();
-        if (descEl) {
-            descEl.select(".intro").remove();
-            descEl.select("h3").remove();
-        }
-        let description = descEl ? descEl.html() : "";
+    description = doc.select('#intro')
+    description.select("p").last().remove()
 
-        let statusText = doc.select(".label-status").text();
-        let isOngoing = true;
-        if (statusText.includes("Full") || statusText.includes("Hoàn thành")) {
-            isOngoing = false;
-        }
+    let detail = doc.select("#info")
+    detail.select("p").get(1).remove()
 
-        return Response.success({
-            name: doc.select("h1[itemprop=name]").first().text(),
-            cover: coverImg,
-            author: doc.select("a[itemprop=author]").first().text(),
-            description: description,
-            detail: detail,
-            ongoing: isOngoing,
-            genres: genres,
-            host: BASE_URL
-        });
-    }
-
-    return null;
+    return Response.success({
+        name: title,
+        cover: cover,
+        author: author,
+        description: description.html(),
+        detail: detail.html().replace("&nbsp;", ""),
+        host: BASE_URL,
+        ongoing: !categories.join(',').includes('完结')
+    });
 }
