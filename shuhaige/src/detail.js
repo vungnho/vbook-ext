@@ -30,7 +30,7 @@ function execute(url) {
             let wordCount = container.select("span.layui-bg-red").text().trim();
             let latestChap = container.select("p.new").text().trim();
 
-            if (wordCount) detail += "📊 Quy mô: " + wordCount + "<br>";
+            if (wordCount) detail += "📊 Scale: " + wordCount + "<br>";
             if (updateTime) detail += "⏰ " + updateTime + "<br>";
             if (latestChap) detail += "📖 " + latestChap + "<br>";
 
@@ -41,7 +41,8 @@ function execute(url) {
             }
 
             let introEl = doc.select("p.intro").first() || doc.select(".intro").first();
-            let description = introEl ? introEl.html() : "Chưa có mô tả.";
+            let description = introEl ? introEl.html() : "Nothing.";
+            description = url;
 
             return Response.success({
                 name: container.select("p.name").text().trim(),
