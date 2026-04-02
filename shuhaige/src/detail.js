@@ -1,41 +1,60 @@
 load('config.js');
+
 function execute(url) {
-    var match = url.match(/(?:shu_)?(\d+)/);
-    var bookId = match ? match[1] : null;
+    url = url.replace(/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/img, BASE_URL);
 
+    let response = fetch(url);
+    if (response.ok) {
+        let doc = response.html();
+        let container = doc.select(".detail").first();
 
-    let response = fetch(BASE_URL + "/" bookId + "/");
-    if (!response.ok) return null;
-    let doc = response.html();
-    let title = doc.select('meta[property="og:novel:book_name"]').attr('content') || '';
-    let author = doc.select('meta[property="og:novel:author"]').attr('content') || '';
-    let cover = doc.select('meta[property="og:image"]').attr('content') || '';
-    let description = doc.select('meta[name="description"]').attr('content') || '';
-    let categories = [];
+        if (container) {
+            let coverImg = container.select("img").first().attr("src");
+            if (coverImg && coverImg.startsWith("//")) {
+                coverImg = "https:" + coverImg;
+            } else if (coverImg && coverImg.startsWith("/")) {
+                coverImg = BASE_URL + coverImg;
+            }
 
-    doc.select('meta[property="og:novel:category"]').forEach(meta => {
-        categories.push(meta.attr('content'));
-    });
+            let genres = [];
+            container.select("p a.layui-btn").forEach(e => {
+                genres.push({
+                    title: e.text().trim(),
+                    input: e.attr("href"),
+                    script: "gen.js"
+                });
+            });
 
-    doc.select('meta[property="og:novel:status"]').forEach(meta => {
-        categories.push(meta.attr('content'));
-    });
-    doc.select("h1").remove()
+            let detail = "";
+            let updateTime = container.select("p:contains(最后更新)").text().trim();
+            let wordCount = container.select("span.layui-bg-red").text().trim();
+            let latestChap = container.select("p.new").text().trim();
 
+            if (wordCount) detail += "📊 Quy mô: " + wordCount + "<br>";
+            if (updateTime) detail += "⏰ " + updateTime + "<br>";
+            if (latestChap) detail += "📖 " + latestChap + "<br>";
 
-    description = doc.select('#intro')
-    description.select("p").last().remove()
+            let statusText = container.select("span.layui-btn-normal").text();
+            let isOngoing = true;
+            if (statusText.includes("完结") || statusText.includes("Full")) {
+                isOngoing = false;
+            }
 
-    let detail = doc.select("#info")
-    detail.select("p").get(1).remove()
+            let introEl = doc.select("p.intro").first() || doc.select(".intro").first();
+            let description = introEl ? introEl.html() : "Chưa có mô tả.";
 
-    return Response.success({
-        name: title,
-        cover: cover,
-        author: author,
-        description: description.html(),
-        detail: detail.html().replace("&nbsp;", ""),
-        host: BASE_URL,
-        ongoing: !categories.join(',').includes('完结')
-    });
+            return Response.success({
+                name: container.select("p.name").text().trim(),
+                cover: coverImg,
+                author: container.select("p.author a").text().trim(),
+                description: description,
+                detail: detail,
+                ongoing: isOngoing,
+                genres: genres,
+                host: BASE_URL
+            });
+        }
+    }
+
+    return null;
 }
