@@ -2,7 +2,7 @@
   "metadata": {
     "name": "Shuhaige.net",
     "author": "Vungnho",
-    "version": 2,
+    "version": 3,
     "source": "https://shuhaige.net/",
     "regexp": "(www.)?shuhaige.net/[^/]+",
     "description": "Shuhaige Novel Network",
