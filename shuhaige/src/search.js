@@ -3,12 +3,15 @@ load('config.js');
 function execute(key, page) {
     if (!page) page = '1';
     let url = "";
-
+    let cookieStr = "Hm_lvt_3094b20ed277f38e8f9ac2b2b29d6263=1775153017; Hm_lvt_f690f2321d66bd8a2db7edc69c11f3da=1775153017";
     if (page === '1') {
         let response = fetch(BASE_URL + "/search.html", {
             method: "POST",
             body: {
                 "searchkey": key
+            },
+            headers: {
+             "Cookie": cookieStr
             }
         });
 
@@ -20,7 +23,11 @@ function execute(key, page) {
     }
 
     if (url) {
-        let response = fetch(url);
+        let response = fetch(url, {
+            headers: {
+                "Cookie": cookieStr
+            }
+        });
         if (response.ok) {
             let doc = response.html();
             let data = [];
