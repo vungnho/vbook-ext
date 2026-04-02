@@ -50,6 +50,17 @@
       "description": "Đọc truyện trên trang MTC.",
       "type": "novel",
       "locale": "vi_VN"
+    },
+    {
+      "name": "Shuhaige.net",
+      "author": "Vungnho",
+      "path": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/shuhaige/plugin.zip",
+      "version": 1,
+      "source": "https://shuhaige.net/",
+      "icon": "https://raw.githubusercontent.com/vungnho/vbook-ext/master/shuhaige/icon.png",
+      "description": "Shuhaige Novel Network",
+      "type": "novel",
+      "locale": "zh_CN"
     }
   ]
 }

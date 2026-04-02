@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "name": "Shuhaige.net",
+    "author": "Vungnho",
+    "version": 1,
+    "source": "https://shuhaige.net/",
+    "regexp": "(www.)?shuhaige.net/[^/]+",
+    "description": "Shuhaige Novel Network",
+    "locale": "zh_CN",
+    "language": "javascript",
+    "type": "novel"
+  },
+  "script": {
+    "home": "home.js",
+    "detail": "detail.js",
+    "page": "page.js",
+    "toc": "toc.js",
+    "search": "search.js",
+    "genre": "genre.js",
+    "chap": "chap.js"
+  }
+}
