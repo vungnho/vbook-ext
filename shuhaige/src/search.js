@@ -11,7 +11,8 @@ function execute(key, page) {
                 "searchkey": key
             },
             headers: {
-             "Cookie": cookieStr
+             "Cookie": cookieStr,
+             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             }
         });
 
@@ -25,7 +26,8 @@ function execute(key, page) {
     if (url) {
         let response = fetch(url, {
             headers: {
-                "Cookie": cookieStr
+                "Cookie": cookieStr,
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
             }
         });
         if (response.ok) {
